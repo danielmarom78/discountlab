@@ -7,6 +7,11 @@ metadata:
    app: {{ .name }}
  name: {{ .name }}
 spec:
+  volumes:
+    - name: index-html
+        configMap:
+          name: '{{ .Chart.Name }}-html'
+          defaultMode: 420
  replicas: 1
  selector:
    matchLabels:
@@ -18,6 +23,9 @@ spec:
        app: {{ .name }}
    spec:
      containers:
+     volumeMounts:
+       - name: index-html
+         mountPath: /tmp/html # this will mount the html.index file to it application location
      - image: quay.io/rhdevelopers/bgd:1.0.0
        name: {{ .name }}
        env:
