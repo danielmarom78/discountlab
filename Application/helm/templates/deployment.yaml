@@ -45,8 +45,8 @@ spec:
               scheme: HTTP
             {{- tpl (toYaml .Values.Probe.liveness) . | nindent 12 }}             
           env:
-                      - name: PORT
-                        value: {{ .Values.containers.containerPort | quote }}          
+            - name: PORT
+              value: {{ .Values.containers.containerPort | quote }}          
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
