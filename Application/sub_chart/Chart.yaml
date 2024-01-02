@@ -3,7 +3,7 @@ name: workshop-test
 description: A Helm chart for Kubernetes
 type: application
 dependencies:
-  - name: dmarom-1.0.0
+  - name: dmarom
     repository: oci://ghcr.io/danielmarom78/helm/
     version: "1.0.0"
     alias: deploy1
