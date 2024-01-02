@@ -7,38 +7,30 @@ metadata:
    app: {{ .name }}
  name: {{ .name }}
 spec:
-  volumes:
-    - name: index-html
-        configMap:
-          name: '{{ .Chart.Name }}-html'
-          defaultMode: 420
-  replicas: 1
-  selector:
-    matchLabels:
-      app: {{ .name }}
-  strategy: {}
-  template:
-    metadata:
-      labels:
-        app: {{ .name }}
-    spec:
-      containers:       
-      - image: quay.io/rhdevelopers/bgd:1.0.0
-        name: {{ .name }}
-        env:
-        - name: COLOR
-          value: {{ .color }}
-        resources: {}
-          volumeMounts:
-          - name: index-html
-            mountPath: /tmp/html # this will mount the html.index file to it application location
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-      securityContext:
-        runAsNonRoot: true
-        seccompProfile:
-          type: RuntimeDefault
+ replicas: 1
+ selector:
+   matchLabels:
+     app: {{ .name }}
+ strategy: {}
+ template:
+   metadata:
+     labels:
+       app: {{ .name }}
+   spec:
+     containers:
+     - image: quay.io/rhdevelopers/bgd:1.0.0
+       name: {{ .name }}
+       env:
+       - name: COLOR
+         value: {{ .color }}
+       resources: {}
+       securityContext:
+         allowPrivilegeEscalation: false
+         capabilities:
+           drop:
+           - ALL
+     securityContext:
+       runAsNonRoot: true
+       seccompProfile:
+         type: RuntimeDefault
 {{- end }}
