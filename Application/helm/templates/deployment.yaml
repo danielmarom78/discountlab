@@ -20,11 +20,11 @@ spec:
           configMap:
             name: '{{ .Chart.Name }}-html'
             defaultMode: 420
-      containers:   
-        volumeMounts:
-          - name: index-html
-            mountPath: /tmp/html # this will mount the html.index file to it application location   
+      containers:           
         - resources: {}
+          volumeMounts:
+            - name: index-html
+              mountPath: /tmp/html # this will mount the html.index file to it application location
           terminationMessagePath: /dev/termination-log
           name: {{ .Chart.Name }}
           ports:
